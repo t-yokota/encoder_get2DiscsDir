@@ -13,7 +13,7 @@ boolean initBool;
 
 const int initRot = 5; // the amount of init rotation for calibrating encoder.
 
-struct encoderValues{
+struct encoderParams{
         int numSlit;
         int slitCount;
         double slitThd;
@@ -25,8 +25,8 @@ struct encoderValues{
         double falseWidAve;
 };
 
-struct encoderValues enc1;
-struct encoderValues enc2;
+struct encoderParams enc1;
+struct encoderParams enc2;
 
 void setup() {
         Serial.begin(2000000);

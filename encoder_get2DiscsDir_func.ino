@@ -1,5 +1,22 @@
-double getSlitThreshold( const int pin_enc, struct encoderValues *enc , const int initRot){
-        Serial.println("get threshold of the wide slit and narrow slit.");
+void getEncState( struct encoderParams *enc ){
+        if( enc->encVal_cr != enc->encVal_prv ){
+                if ( enc->encVal_cr == false ){
+                        enc->falseSrt = micros();
+                }
+                if( enc->encVal_cr == true ){
+                        enc->falseEnd = micros();
+                        unsigned long falseTime = enc->falseEnd - enc->falseSrt;
+                        //Serial.println(falseTime);
+                        if( falseTime  > enc->slitThd ){
+                                enc->slitCount = 0;
+                        }else{
+                                enc->slitCount += 1;
+                        }
+                }
+        }
+}
+
+double getSlitThreshold( const int pin_enc, struct encoderParams *enc , const int initRot){
         unsigned int elemCount;
         const int numElem =  ( enc->numSlit + 1 ) * initRot;
         unsigned long falseNrrw[ numElem ];
@@ -13,7 +30,9 @@ double getSlitThreshold( const int pin_enc, struct encoderValues *enc , const in
                 falseNrrw[ i ] = 0;
                 falseWid[ i ] = 0;
         }
-        
+
+        Serial.println("get threshold of the wide slit and narrow slit.");
+
         enc->falseSrt = micros();
         while( enc->slitCount <= numElem + (enc->numSlit+1) ){
                 enc->encVal_cr = digitalRead(pin_enc); // in the slit area = false,  except area = true;
@@ -71,24 +90,6 @@ double getSlitThreshold( const int pin_enc, struct encoderValues *enc , const in
         }
         enc->slitCount = 0;
         return enc->slitThd = enc->falseWidAve / enc->slitThd;
-}
-
-void getEncState( struct encoderValues *enc ){
-        if( enc->encVal_cr != enc->encVal_prv ){
-                if ( enc->encVal_cr == false ){
-                        enc->falseSrt = micros();
-                }
-                if( enc->encVal_cr == true ){
-                        enc->falseEnd = micros();
-                        unsigned long falseTime = enc->falseEnd - enc->falseSrt;
-                        //Serial.println(falseTime);
-                        if( falseTime  > enc->slitThd ){
-                                enc->slitCount = 0;
-                        }else{
-                                enc->slitCount += 1;
-                        }
-                }
-        }
 }
 
 double mean( unsigned long x[], int xlength ){
