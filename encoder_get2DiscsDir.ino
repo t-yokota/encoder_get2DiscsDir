@@ -72,8 +72,8 @@ void loop() {
                 enc1.encVal_cr = digitalRead(PIN_ENC_1); // in the slit area = false,  except area = true;
                 enc2.encVal_cr = digitalRead(PIN_ENC_2); // in the slit area = false,  except area = true;
                 
-                getEncState( &enc1 );
-                getEncState( &enc2 );
+                cntEncSlit( &enc1 );
+                cntEncSlit( &enc2 );
                 
                 enc1.encVal_prv = enc1.encVal_cr;
                 enc2.encVal_prv = enc2.encVal_cr;

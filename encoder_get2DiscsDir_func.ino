@@ -1,4 +1,4 @@
-void getEncState( struct encoderParams *enc ){
+void cntEncSlit( struct encoderParams *enc ){
         if( enc->encVal_cr != enc->encVal_prv ){
                 if ( enc->encVal_cr == false ){
                         enc->falseSrt = micros();
