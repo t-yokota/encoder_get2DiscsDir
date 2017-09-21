@@ -23,7 +23,7 @@ double getSlitThd( const int pin_enc, struct encoderParams *enc , const int init
         unsigned long falseWid[ numElem ];
         double falseNrrwStd;
         double falseWidStd;
-       
+        
         enc->slitCount = 0;
         elemCount = 0;
         for( int i = 0; i < numElem; i++ ){

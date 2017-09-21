@@ -46,13 +46,13 @@ void setup() {
         enc2.falseSrt = micros();
         enc1.encVal_prv = digitalRead(PIN_ENC_1);
         enc2.encVal_prv = digitalRead(PIN_ENC_2);
+        
         digitalWrite(PIN_LED_1, LOW);
         digitalWrite(PIN_LED_2, LOW);
 }
 
 void loop() {
-        // get a BUSY flag from a motor driver.
-        // now, we use a stepping motor driven by L6470 and be waiting end of the acceleration.
+        // get a BUSY flag from a motor driver L6470 and be waiting end of the acceleration.
         while( !( digitalRead(PIN_BUSY_1) && digitalRead(PIN_BUSY_2) ) ){ 
                initBool = true;
                Serial.println("busy_now");
