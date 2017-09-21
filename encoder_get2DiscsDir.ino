@@ -61,8 +61,8 @@ void loop() {
 
         // get threshold of the magnification between wide slit and thin slit.
         if( initBool == true ){
-                enc1.slitThd = getSlitThreshold( pin_enc_1, &enc1 ,initRot );
-                enc2.slitThd = getSlitThreshold( pin_enc_2, &enc2 ,initRot );
+                enc1.slitThd = getSlitThd( pin_enc_1, &enc1 ,initRot );
+                enc2.slitThd = getSlitThd( pin_enc_2, &enc2 ,initRot );
                 initBool = false;                
         }
         

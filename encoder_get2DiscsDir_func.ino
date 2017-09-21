@@ -16,7 +16,7 @@ void cntEncSlit( struct encoderParams *enc ){
         }
 }
 
-double getSlitThreshold( const int pin_enc, struct encoderParams *enc , const int initRot){
+double getSlitThd( const int pin_enc, struct encoderParams *enc , const int initRot){
         unsigned int elemCount;
         const int numElem =  ( enc->numSlit + 1 ) * initRot;
         unsigned long falseNrrw[ numElem ];
